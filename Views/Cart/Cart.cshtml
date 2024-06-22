@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OrderItem>
+@{
+    ViewData["Title"] = "Cart";
+}
+<h1>Cart</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.ProductName</td>
+                <td>
+                    <a asp-controller="Cart" asp-action="DecreaseQuantity" asp-route-id="@item.ProductId">-</a>
+                    @item.Quantity
+                    <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.ProductId">+</a>
+                </td>
+                <td>@item.Price</td>
+                <td>@(item.Quantity * item.Price)</td>
+                <td>
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.ProductId">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Orders" asp-action="Checkout">Checkout</a>
+</div>

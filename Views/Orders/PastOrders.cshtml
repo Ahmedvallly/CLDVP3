@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Order>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Past Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Past Orders</h1>
+        @if (!Model.Any())
+        {
+            <p>You have no past orders.</p>
+        }
+        else
+        {
+            @foreach (var order in Model)
+            {
+                <h3>Order Tracking: @order.TrackingNumber</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in order.OrderItems)
+                        {
+                            <tr>
+                                <td>@item.Product.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price</td>
+                                <td>@(item.Quantity * item.Price)</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Order Total:</td>
+                            <td>@order.TotalPrice</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿@model IEnumerable<OrderItem>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tfoot td {
+            font-weight: bold;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Checkout</h1>
+
+    <!-- Table to display cart items -->
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.ProductPrice.ToString("C")</td>
+                    <td>@(item.Quantity * item.Product.ProductPrice)</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <!-- Row for total price -->
+            <tr>
+                <td colspan="3">Total:</td>
+                <!-- Calculate total price using LINQ -->
+                <td>@Model.Sum(item => item.Quantity * item.Product.ProductPrice)</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- Address form -->
+    <h2>Shipping Address</h2>
+    <form asp-action="Payment" method="post">
+        <div>
+            <label for="street">Street</label>
+            <input type="text" id="street" name="street" required />
+        </div>
+        <div>
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required />
+        </div>
+        <div>
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" required />
+        </div>
+        <div>
+            <label for="zipCode">Zip Code</label>
+            <input type="text" id="zipCode" name="zipCode" required />
+        </div>
+        <div>
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required />
+        </div>
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+</html>

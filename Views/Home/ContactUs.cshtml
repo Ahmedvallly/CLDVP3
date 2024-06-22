@@ -1,0 +1,49 @@
+﻿@page
+@model KhumaloCraftFinal.Views.Home.Contact_usModel
+@{
+    ViewBag.Title = "Contact";
+}
+<div class="container mt-5">
+    <h2>Contact Us</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <p>Please fill in the form below to send us a message.</p>
+            <div class="card" style="background-color: slategray; color: white;">
+               
+                <div class="card-body">
+            <div class="card" style="background-color: slategray; color: white;"> 
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Your Phone Number" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="Your Location" required>
+                    </div>
+                </div>
+                <div  class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control"style="id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+                </div>
+                <button style ="margin-top: 20px" type="submit" class="btn btn-primary">Submit</button>
+           </div></div>
+        </div>
+        <div class="col-md-4">
+            <h3>My Contact Details</h3>
+            <p><strong>Name:</strong> Khumalo</p>
+            <p><strong>Email:</strong> Khumalo@gmail.com</p>
+            <p><strong>Phone:</strong>+27 828556991</p>
+            <p><strong>Location:</strong> Durban</p>
+        </div>
+    </div>
+</div>

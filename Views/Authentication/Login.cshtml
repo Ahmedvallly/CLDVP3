@@ -1,0 +1,24 @@
+﻿@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="form-group">
+        <label class="control-label col-md-2">Username:</label>
+        <div class="col-md-10">
+            @Html.TextBox("username")
+            @Html.ValidationMessage("username", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Password:</label>
+        <div class="col-md-10">
+            @Html.Password("password")
+            @Html.ValidationMessage("password", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Log In" class="btn btn-primary" />
+        </div>
+    </div>
+}

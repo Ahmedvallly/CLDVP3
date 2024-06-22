@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Order Successful";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Thank you for your order!</h2>
+            <p>Your order has been successfully placed.</p>
+            <p>You will be redirected to the home page in <span id="countdown">5</span> seconds.</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var countdown = 5;
+        var countdownElement = document.getElementById("countdown");
+
+        function redirect() {
+            window.location.replace("@Url.Action("Index", "Home")");
+        }
+
+        function updateCountdown() {
+            countdownElement.textContent = countdown;
+            countdown--;
+
+            if (countdown < 0) {
+                redirect();
+            } else {
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+
+        updateCountdown();
+    </script>
+}

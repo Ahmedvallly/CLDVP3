@@ -1,0 +1,45 @@
+﻿<!-- OrderStatusPage.cshtml -->
+@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "Order Status";
+}
+<h1>Order Status</h1>
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Shipping Address</th>
+                <th>Total Price</th>
+                <th>Tracking Number</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.UserId</td>
+                    <td>@order.ShippingAddress</td>
+                    <td>@order.TotalPrice.ToString("C")</td>
+                    <td>@order.TrackingNumber</td>
+                    <td>@order.Status</td>
+                    <td>
+                        <form asp-action="UpdateOrderStatus" asp-route-id="@order.Id" method="post">
+                            <select name="newStatus" asp-items="@Html.GetEnumSelectList<Order.OrderStatus>()"></select>
+                            <button type="submit" class="btn btn-primary">Update Status</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No orders found.</p>
+}
